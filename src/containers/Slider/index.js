@@ -12,7 +12,9 @@ const Slider = () => {
   );
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
+      // Eviter que l'index dépasse le nombres de projets en ajoutant - 1.
+
+      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
       5000
     );
   };
@@ -22,7 +24,6 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
           <div
             key={event.title}
             className={`SlideCard SlideCard--${
@@ -38,20 +39,24 @@ const Slider = () => {
               </div>
             </div>
           </div>
+          // Fermer le premier map pour eviter que event soit déclarer deux fois et qu'il n'y ait pas de conflits dans les map.
+      ))} 
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {/* Ajout du paramètre event car il n'y avait que _ et ajout du ? apres byDateDesc */}
+              {byDateDesc?.map((event, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                // Pas d'id c'est pourquoi plutot choisir le titre qui est unique selon les projets. 
+                  key={event.title}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx}
+                  // Enlever l'erreur de la console dû au checked en ajoutant la propriété readOnly.
+                  readOnly
                 />
               ))}
             </div>
           </div>
-        </>
-      ))}
     </div>
   );
 };
