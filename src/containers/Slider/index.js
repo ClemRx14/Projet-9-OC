@@ -8,7 +8,9 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    // Inversement de l'ordre d'affichage dans le slider.
+
+    new Date(evtA.date) < new Date(evtB.date) ? 1 : - 1
   );
   const nextCard = () => {
     setTimeout(
@@ -43,7 +45,7 @@ const Slider = () => {
       ))} 
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {/* Ajout du paramètre event car il n'y avait que _ et ajout du ? apres byDateDesc */}
+              {/* Ajout du paramètre event car il n'y avait que _ et donc ajouter event.title plus bas et ajout du ? apres byDateDesc */}
               {byDateDesc?.map((event, radioIdx) => (
                 <input
                 // Pas d'id c'est pourquoi plutot choisir le titre qui est unique selon les projets. 

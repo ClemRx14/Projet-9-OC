@@ -12,5 +12,5 @@ export const MONTHS = {
   11: "novembre",
   12: "décembre",
 };
-
-export const getMonth = (date) => MONTHS[date.getMonth()];
+// Erreur d'alignement... l'index 0 pour janvier et 11 pour décembre..
+export const getMonth = (date) => MONTHS[date.getMonth() + 1];
