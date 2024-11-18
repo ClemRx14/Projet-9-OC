@@ -7,7 +7,8 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
+  // Utiliser la valeur de data.focus et si celle-ci est nulle ou undefined alors creation d'un tableau vide.
+  const byDateDesc = (data?.focus || []).sort((evtA, evtB) =>
     // Inversement de l'ordre d'affichage dans le slider.
 
     new Date(evtA.date) < new Date(evtB.date) ? 1 : - 1
