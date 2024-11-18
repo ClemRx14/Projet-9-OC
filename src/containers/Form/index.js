@@ -16,6 +16,9 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
+        // Ajout de onSucess permettant de déclencher l'action de réussite après la soumission du form,
+        // en effet le form effectuait une action asynchrone lié à l'api mais il n'était pas dit que la soumission était réussie.
+        onSuccess();
       } catch (err) {
         setSending(false);
         onError(err);
