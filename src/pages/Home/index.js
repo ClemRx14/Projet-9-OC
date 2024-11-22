@@ -156,5 +156,4 @@ const Page = () => {
     </footer>
   </>
 }
-
 export default Page;

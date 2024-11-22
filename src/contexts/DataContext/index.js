@@ -30,13 +30,21 @@ export const DataProvider = ({ children }) => {
     if (data) return;
     getData();
   });
-  
+
+  // Il faut determiner quel est le dernier évènement en les triant par date décroissante.
+  const lastEvent = data?.events 
+  ? data.events
+  .sort((a, b) => new Date(b.date) - new Date(a.date))
+  [0] : null;
+
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
         error,
+        // last n'était pas présent dans le contexte c'est pourquoi il était retourné comme undefined et n'était donc pas accessible.
+        last: lastEvent,
       }}
     >
       {children}
