@@ -114,16 +114,24 @@ const Page = () => {
       </div>
     </main>
     <footer className="row">
-      <div className="col presta">
+{/* Vérification conditionnelle pour s'assurer que last est bien définis ava,t de rendre le composant évitant à React
+de rendre le composant avant qu'ils naient accès à toutes les données, ainsi il n'y as pas de undefined dans la console
+, et si c'est le cas alors un message de chargement s'affiche. */}
+    <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <EventCard
+        {last ? (
+          <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
           label="boom"
         />
+        ) : (
+          <div>Chargement...</div>
+        )}
       </div>
+
       <div className="col contact">
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
