@@ -13,24 +13,31 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const filteredEvents = (
-    (!type
-      ? data?.events
-      : data?.events) || []
-  ).filter((event, index) => {
-    if (
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index
-    ) {
-      return true;
-    }
-    return false;
-  });
+  // Fonction qui filtre les événements avec des conditions qui ne filtrent pas 
+  // const filteredEvents = (
+  //   (!type
+  //     ? data?.events
+  //     : data?.events) || []
+  // ).filter((event, index) => {
+  //   if (
+  //     (currentPage - 1) * PER_PAGE <= index &&
+  //     PER_PAGE * currentPage > index
+  //   ) {
+  //     return true;
+  //   }
+  //   return false;
+  // });
+  
+  const filteredEvents = 
+
+
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
   };
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
+
+  // Ici sont générés les différents types disponibles
   const typeList = new Set(data?.events.map((event) => event.type));
   return (
     <>
@@ -38,6 +45,7 @@ const EventList = () => {
       {data === null ? (
         "loading"
       ) : (
+        // Le composant select ici permet de selctionner un type qui met à jour l'état type.
         <>
           <h3 className="SelectTitle">Catégories</h3>
           <Select
