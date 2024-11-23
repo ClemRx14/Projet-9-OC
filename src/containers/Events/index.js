@@ -27,8 +27,18 @@ const EventList = () => {
   //   }
   //   return false;
   // });
-  
-  const filteredEvents = 
+
+  const filteredEvents = (data?.events || []).filter((event,index) => {
+    // Les conditions ici vont filtrer les événements 
+    // Verification du type selectionné et du type de l'évènement, excluion si différence.
+    if (event.type !== type) {
+      return false;
+    }
+    if ((currentPage - 1) * PER_PAGE <= index && PER_PAGE * currentPage > index) {
+      return true;
+    }
+    return false;
+  });
 
 
   const changeType = (evtType) => {
@@ -39,6 +49,8 @@ const EventList = () => {
 
   // Ici sont générés les différents types disponibles
   const typeList = new Set(data?.events.map((event) => event.type));
+  // typeList bien accessible
+  console.log ("valeurs typelist", typeList);
   return (
     <>
       {error && <div>An error occured</div>}
