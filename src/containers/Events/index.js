@@ -31,7 +31,7 @@ const EventList = () => {
   const filteredEvents = (data?.events || []).filter((event,index) => {
     // Les conditions ici vont filtrer les événements 
     // Verification du type selectionné et du type de l'évènement, excluion si différence.
-    if (event.type !== type) {
+    if (type && event.type !== type) {
       return false;
     }
     if ((currentPage - 1) * PER_PAGE <= index && PER_PAGE * currentPage > index) {
@@ -45,7 +45,9 @@ const EventList = () => {
     setCurrentPage(1);
     setType(evtType);
   };
-  const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
+  // Enlever le +1 qui fausse les calcul sur le nombre de pages et changer la formule de calcul pour ajouter une page seulement si nécessaire 
+
+  const pageNumber = Math.ceil((filteredEvents?.length || 0) / PER_PAGE);
 
   // Ici sont générés les différents types disponibles
   const typeList = new Set(data?.events.map((event) => event.type));
