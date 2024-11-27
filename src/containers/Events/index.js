@@ -42,17 +42,16 @@ const EventList = () => {
 
 
   const changeType = (evtType) => {
+    // le changement de type est bien pris en compte mais retourne null
+    console.log("Changement de type :", evtType);
     setCurrentPage(1);
     setType(evtType);
   };
-  // Enlever le +1 qui fausse les calcul sur le nombre de pages et changer la formule de calcul pour ajouter une page seulement si nécessaire 
-
-  const pageNumber = Math.ceil((filteredEvents?.length || 0) / PER_PAGE);
+  
+  const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
 
   // Ici sont générés les différents types disponibles
   const typeList = new Set(data?.events.map((event) => event.type));
-  // typeList bien accessible
-  console.log ("valeurs typelist", typeList);
   return (
     <>
       {error && <div>An error occured</div>}
