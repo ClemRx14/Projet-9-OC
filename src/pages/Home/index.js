@@ -125,7 +125,7 @@ de rendre le composant avant qu'ils naient accès à toutes les données, ainsi 
           title={last?.title}
           date={new Date(last?.date)}
           small
-          label="boom"
+          label={last.type}
         />
         ) : (
           <div>Chargement...</div>
